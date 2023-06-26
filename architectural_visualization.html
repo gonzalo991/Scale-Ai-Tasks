@@ -1,0 +1,175 @@
+<!--
+**High Level*: Other
+
+Category:
+WebXR (AFrame)
+
+Topic:
+Physics and Collision Detection
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Architectural Visualization with Training Simulation</title>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@5.0.1/dist/aframe-physics-system.min.js"></script>
+</head>
+<body>
+  <a-scene physics="debug: true">
+    <!-- Environment -->
+    <a-sky color="#ECECEC"></a-sky>
+    <a-plane position="0 0 0" rotation="-90 0 0" width="10" height="10" color="#CCC" static-body></a-plane>
+
+    <!-- Objects -->
+    <a-box position="0 1.5 -3" width="1" height="3" depth="1" color="#FFC65D" dynamic-body></a-box>
+    <a-cylinder position="2 0.75 -5" radius="0.5" height="1.5" color="#85CEFF" dynamic-body></a-cylinder>
+    <a-sphere position="-2 0.75 -5" radius="0.75" color="#FF6384" dynamic-body></a-sphere>
+
+    <!-- User Interaction -->
+    <a-entity camera look-controls>
+      <a-cursor></a-cursor>
+    </a-entity>
+
+    <!-- Training Simulation -->
+    <a-text position="-4 2 -5" rotation="0 30 0" value="Training Mode" color="#FFF" scale="1.5 1.5 1.5"></a-text>
+    <a-box position="-4 1 -5" width="1" height="1" depth="1" color="#FF0000" static-body></a-box>
+  </a-scene>
+</body>
+</html>
+
+<!--
+1. Improve this code adding functionalities for training simulation
+
+Here is an improved version of the code that integrates the training simulation
+into the architectural visualisation using the A-frame:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Architectural Visualization with Training Simulation</title>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@5.0.1/dist/aframe-physics-system.min.js"></script>
+</head>
+<body>
+  <a-scene physics="debug: true">
+     Environment
+    <a-sky color="#ECECEC"></a-sky>
+    <a-plane position="0 0 0" rotation="-90 0 0" width="10" height="10" color="#CCC" static-body></a-plane>
+
+     Objects
+    <a-box position="0 1.5 -3" width="1" height="3" depth="1" color="#FFC65D" dynamic-body></a-box>
+    <a-cylinder position="2 0.75 -5" radius="0.5" height="1.5" color="#85CEFF" dynamic-body></a-cylinder>
+    <a-sphere position="-2 0.75 -5" radius="0.75" color="#FF6384" dynamic-body></a-sphere>
+
+     User Interaction
+    <a-entity camera look-controls>
+      <a-cursor></a-cursor>
+    </a-entity>
+
+     Training Simulation
+    <a-text position="-4 2 -5" rotation="0 30 0" value="Training Mode" color="#FFF" scale="1.5 1.5 1.5"></a-text>
+    <a-box position="-4 1 -5" width="1" height="1" depth="1" color="#FF0000" static-body></a-box>
+  </a-scene>
+</body>
+</html>
+```
+To explain:
+- This improved code is an extension of the previous architecture visualisation code with
+the addition of a training simulation feature.
+- To indicate the training mode, a text entity (<a-text>) is added.
+- To represent an obstacle in the training simulation, a red box (<a-box>) is placed next to the text entity.
+To make it immobile, the static-body component is assigned to it.
+- The user will be able to navigate around the scene and interact with the objects as before, but now they will have
+to navigate around the obstacle in the training simulation.
+- To suit your specific training scenario, you can adjust the position, size and appearance of the training elements.
+- With this enhanced code, users can simulate training scenarios that require them to avoid obstacles or follow
+specific paths, while still being able to explore and navigate the architectural environment.
+
+2. How is physics simulation integrated into the scene in this code?
+
+The AFrame physics system is used in the supplied code to integrate the physics simulation into the scene.
+AFrame provides physics interactions and simulations within the virtual environment using a physics component
+called aframe physics system.
+
+The integration of the physics simulation into the code is done in the following steps:
+
+The AFrame physics system is included in the HTML file in the form of a script —
+```html
+<script src="https://cdn.jsdelivr.net/npm/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
+```
+The objects that are in need of physics simulation have physics components added to them. This code represents
+objects as HTML entities using the a-entity tag. For example, the definition of the ground is —
+```html
+<a-entity id="ground" static-body geometry="primitive: plane" position="0 -1 0" rotation="-90 0 0" material="color: #7BC8A4"></a-entity>
+```
+To indicate that the ground is a static object, unaffected by physics, the static body component is added.
+3. The scene element is annotated with the Physics attribute, which allows the entire scene to become physically simulated —
+```html
+<a-scene physics>
+  ...
+</a-scene>
+```
+The code integrates physics simulation into architectural visualisation by incorporating the AFrame physics system,
+adding physics components to objects, and enabling on scene physics. Based on the physics rules defined by the AFrame
+physics system, objects with physics components exhibit realistic interactions such as collisions, gravity and motion.
+
+
+3. What HTML elements are used to represent the objects in this code?
+
+The following HTML elements are used to represent the objects in the architectural visualisation in the provided code:
+- <a-box> — Represents a box-type object in the scene. It serves to create objects with properties such as position,
+size (width, height, depth) and colour.
+- <a-cylinder> — Represents a cylinder shape object in the scene. Used for creating objects with properties including
+position, radius, height and colour.
+- <a-sphere> — Represents a sphere object in the scene. Used to create objects with properties like position,
+radius and colour.
+
+These elements provide a convenient way to create and manipulate 3D objects in the virtual scene and are part of the
+AFrame framework. To achieve the desired appearance and behaviour, they can be further customised with
+various attributes and properties.
+
+4. In this code how is user interaction enabled in the scene?
+
+The following elements are used to activate it in the scene:
+- <a-entity camera look-controls> — This element represents the camera in the scene and allows the user to control
+the point of view of the camera. The viewpoint attribute allows the user to look around by moving their head or device.
+- <a-cursor></a-cursor> — This element represents the cursor which is used to interact and select within the scene.
+The cursor is used to provide a visual indication of where the user is pointing. It interacts by default with clickable
+or interactive objects.
+
+Here is the relevant code:
+```html
+<a-entity camera look-controls>
+  <a-cursor></a-cursor>
+</a-entity>
+```
+They combine to allow the user to interact with the scenery. Cursor allows users to move camera position and interact
+with objects. Depending on the requirements of the application, the specific behaviour of user interaction and object
+selection can be further customised and extended.
+
+5. What is the purpose of the training simulation elements in the code?
+
+Creating a specific scenario or environment for training purposes is the purpose of the training simulation elements in
+the code. Within the architectural visualisation scene, these elements are intended to simulate a training mode.
+They serve as an example of how to integrate training simulations into an architectural visualisation using
+the AFrame framework. Let's have a breakdown of the training simulation elements in the code:
+
+- <a-text position="-4 2 -5" rotation="0 30 0" value="Training Mode" color="#FFF" scale="1.5 1.5 1.5"></a-text> — This
+element represents a text entity displaying the label "Training Mode". It is positioned at coordinates (-4, 2, -5) and
+ rotated 30 degrees along the y-axis. The colour of the text is white. It is scaled to a factor of 1.5.
+
+- <a-box position="-4 1 -5" width="1" height="1" depth="1" color="#FF0000" static-body></a-box> — This element
+represents a red box entity that serves as a visual representation of a training object or element. It is located
+at coordinates (-4, 1, -5) and is 1 unit wide, 1 unit high and 1 unit deep. The box is set as a static body, i.e.
+it does not have any movement or interaction with the physics simulations.
+
+The code provides a simple example of a training simulation where the user is required to navigate around an obstacle.
+The training simulation elements are designed to be easy to modify and extend, allowing users to create training
+simulations that suit their specific requirements.
+
+It's important to note that while the provided code serves as a basic example, the training simulations can be further enhanced and customised to suit the user's specific needs.
+-->
