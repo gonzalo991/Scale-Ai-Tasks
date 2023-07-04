@@ -94,33 +94,63 @@ print(f"Test Set RMSE: {rmse:.2f}")
 
 
 '''
-In this example, we start by loading the sales data from a CSV file and breaking it down into the features (X) and the variable of interest (y). We then train a random forest regression model on the data and save the trained model using the joblib library.
+In this example, we start by loading the sales data from a CSV file and breaking it down into the features 
+(X) and the variable of interest (y). We then train a random forest regression model on the data and save 
+the trained model using the joblib library.
 
-We then introduce MLOps practices, including deploying the model in production, setting up monitoring for model performance and data drift, scheduling periodic model retraining with fresh data, automating the data preprocessing, model training and deployment pipeline, and setting up alerts and notifications for model failures or anomalies.
+We then introduce MLOps practices, including deploying the model in production, setting up monitoring for 
+model performance and data drift, scheduling periodic model retraining with fresh data, automating the data 
+preprocessing, model training and deployment pipeline, and setting up alerts and notifications for model failures 
+or anomalies.
 
-We load the trained model and make predictions for demand forecasting using new sales data after implementing MLOps practices. Predicted sales can then be used for inventory management and supply chain optimisation, including inventory adjustments, sourcing decisions and logistics planning.
+We load the trained model and make predictions for demand forecasting using new sales data after implementing 
+MLOps practices. Predicted sales can then be used for inventory management and supply chain optimisation, 
+including inventory adjustments, sourcing decisions and logistics planning.
 
-Finally, to ensure accurate demand forecasting and effective supply chain optimisation, we emphasise the importance of continuously monitoring the performance of the model and updating it as necessary.
+Finally, to ensure accurate demand forecasting and effective supply chain optimisation, we emphasise the 
+importance of continuously monitoring the performance of the model and updating it as necessary.
 
-It should be noted that this is a simplified example and that in real situations additional steps, considerations and integration with existing systems will be required to fully optimize the supply chain using MLOps practices.
+It should be noted that this is a simplified example and that in real situations additional steps, 
+considerations and integration with existing systems will be required to fully optimize the supply 
+chain using MLOps practices.
 
 4. What data preprocessing steps are performed in this code? Why are they necessary?
 
 The data preprocessing steps performed in this code are:
-1. Splitting the data into training and testing sets — The data set is divided into the input features and the corresponding target variable. In order to train the machine learning model, this separation is necessary.
-2. Creating and training the model — In this step, a random forest model is created with the help of the RandomForestRegressor class from the scikit-learn library. The model is configured with the number of trees and other hyper-parameters of interest. The model is then trained on training data containing input features (X_train) and corresponding targets (Y_train).
-3. Evaluate the model using cross-validation — Cross-validation is a technique for the evaluation of a model's performance on unseen data. This step uses scikit-learn's cross_val_score function to perform k-fold cross-validation on the training data. On different subsets of the training data, the model is trained and evaluated several times. This helps to estimate the performance of the model and to identify potential problems such as over-fitting.
-4. Calculate the mean and standard deviation of the cross-validation scores — The scores obtained from each fold are collected after cross-validation. The mean and standard deviation of these scores are calculated. This provides an overall measure of the model's performance. The mean score is an indication of the average performance of the model across different folds, while the standard deviation is an indication of the variability of the scores.
-5. Make predictions on the test set — The model is ready to make predictions on unseen data once its performance has been assessed using cross-validation. This step is the prediction of the target values for the test data (X_test) with the trained model. The predicted values are stored in y_pred.
-6. Calculate the root mean squared error (RMSE) on the test set — To evaluate the accuracy of regression models, the RMSE is a commonly used metric. It measures the average difference between the predicted values and the actual values in the test set of data. In this step, the RMSE is calculated using scikit-learn's mean_squared_error function, taking the target actuals (y_test) and the predictions (y_pred).
+1. Splitting the data into training and testing sets — The data set is divided into the input features 
+and the corresponding target variable. In order to train the machine learning model, this separation is necessary.
+2. Creating and training the model — In this step, a random forest model is created with the help of the 
+RandomForestRegressor class from the scikit-learn library. The model is configured with the number of trees 
+and other hyper-parameters of interest. The model is then trained on training data containing input features 
+(X_train) and corresponding targets (Y_train).
+3. Evaluate the model using cross-validation — Cross-validation is a technique for the evaluation of a model's 
+performance on unseen data. This step uses scikit-learn's cross_val_score function to perform k-fold cross-validation 
+on the training data. On different subsets of the training data, the model is trained and evaluated several times. 
+This helps to estimate the performance of the model and to identify potential problems such as over-fitting.
+4. Calculate the mean and standard deviation of the cross-validation scores — The scores obtained from each fold are
+ collected after cross-validation. The mean and standard deviation of these scores are calculated. This provides an 
+ overall measure of the model's performance. The mean score is an indication of the average performance of the model 
+ across different folds, while the standard deviation is an indication of the variability of the scores.
+5. Make predictions on the test set — The model is ready to make predictions on unseen data once its performance has 
+been assessed using cross-validation. This step is the prediction of the target values for the test data (X_test) with 
+the trained model. The predicted values are stored in y_pred.
+6. Calculate the root mean squared error (RMSE) on the test set — To evaluate the accuracy of regression models, 
+the RMSE is a commonly used metric. It measures the average difference between the predicted values and the actual 
+values in the test set of data. In this step, the RMSE is calculated using scikit-learn's mean_squared_error function, 
+taking the target actuals (y_test) and the predictions (y_pred).
 
 These preprocessing steps are necessary to prepare the data for machine learning and to evaluate the model's performance.
 
-The first two steps, splitting the data and creating the model, are required to train the model using the training set and to evaluate its performance using the testing set. The cross-validation in step 3 helps to evaluate the model's performance more accurately by comparing it to multiple models. The mean and standard deviation of the cross-validation scores in step 4 provide a more comprehensive evaluation of the model's performance.
+The first two steps, splitting the data and creating the model, are required to train the model using the training 
+set and to evaluate its performance using the testing set. The cross-validation in step 3 helps to evaluate the model's 
+performance more accurately by comparing it to multiple models. The mean and standard deviation of the cross-validation
+scores in step 4 provide a more comprehensive evaluation of the model's performance.
 
-Making predictions on the test set in step 5 allows us to see how well the model performs on new data. The root mean squared error (RMSE) calculated in step 6 is a common measure of the model's prediction accuracy.
+Making predictions on the test set in step 5 allows us to see how well the model performs on new data. The root
+ mean squared error (RMSE) calculated in step 6 is a common measure of the model's prediction accuracy.
 
-These preprocessing steps are necessary to ensure that the model is well-trained, well-evaluated and ready for use in production.
+These preprocessing steps are necessary to ensure that the model is well-trained, well-evaluated and ready for
+ use in production.
 
 
 
@@ -128,14 +158,27 @@ These preprocessing steps are necessary to ensure that the model is well-trained
 
 ChatGPT
 
-In the provided code, there are a few data preprocessing steps that are performed before training the machine learning model. Here are the steps and their purposes:
+In the provided code, there are a few data preprocessing steps that are performed before training the machine 
+learning model. Here are the steps and their purposes:
 
-1.  Splitting the data: The initial data, which consists of the features (`X`) and the target variable (`y`), is split into training and test sets using the `train_test_split` function from scikit-learn. The purpose of this step is to have separate datasets for training and evaluation. The training set is used to train the model, while the test set is used to assess its performance on unseen data.
+1.  Splitting the data: The initial data, which consists of the features (`X`) and the target variable (`y`),
+ is split into training and test sets using the `train_test_split` function from scikit-learn. The purpose of 
+ this step is to have separate datasets for training and evaluation. The training set is used to train the model, 
+ while the test set is used to assess its performance on unseen data.
     
-2.  Handling missing values: The `SimpleImputer` class from scikit-learn is used to fill in any missing values in the dataset. In this code, the missing values are filled with the mean of the corresponding feature. Handling missing values is necessary because many machine learning algorithms cannot handle missing data, and leaving them as-is can lead to errors or biased results.
+2.  Handling missing values: The `SimpleImputer` class from scikit-learn is used to fill in any missing values 
+in the dataset. In this code, the missing values are filled with the mean of the corresponding feature. Handling 
+missing values is necessary because many machine learning algorithms cannot handle missing data, and leaving them 
+as-is can lead to errors or biased results.
     
-3.  Scaling the features: The `StandardScaler` class from scikit-learn is used to scale the numerical features. Scaling the features is important because it brings them to a similar scale, which can help improve the performance of certain machine learning algorithms. It prevents features with larger values from dominating the learning process and ensures that all features contribute equally to the model's training.
+3.  Scaling the features: The `StandardScaler` class from scikit-learn is used to scale the numerical 
+features. Scaling the features is important because it brings them to a similar scale, which can help 
+improve the performance of certain machine learning algorithms. It prevents features with larger values 
+from dominating the learning process and ensures that all features contribute equally to the model's training.
     
 
-These preprocessing steps are necessary to ensure that the data is in a suitable format for training the machine learning model. They help address common issues like missing values and feature scaling, which can affect the performance and accuracy of the model. By preprocessing the data appropriately, we can enhance the model's ability to learn patterns and make accurate predictions.
+These preprocessing steps are necessary to ensure that the data is in a suitable format for training the
+machine learning model. They help address common issues like missing values and feature scaling, which can 
+affect the performance and accuracy of the model. By preprocessing the data appropriately, we can enhance the 
+model's ability to learn patterns and make accurate predictions.
 '''
