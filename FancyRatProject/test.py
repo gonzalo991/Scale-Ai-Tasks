@@ -21,8 +21,8 @@ model = tf.keras.models.Sequential([
 
 # Compile the model with the specified optimizer, loss function, and metrics
 model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
+            loss='sparse_categorical_crossentropy',
+            metrics=['accuracy'])
 
 # Train the model on the training dataset for 5 epochs
 model.fit(x_train, y_train, epochs=5)
