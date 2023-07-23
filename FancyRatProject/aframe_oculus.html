@@ -1,0 +1,24 @@
+< !DOCTYPE html>
+    <html>
+
+    <head>
+        <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/gh/wmurphyrd/aframe-super-hands-component@3.0.1/dist/super-hands.min.js"></script>
+    </head>
+
+    <body>
+        <a-scene physics="gravity: -9.8">
+            <a-entity camera raycaster look-controls position="0 1.6 0">
+                <a-entity cursor: "fuse: false; fuseTimeout: 500" position: "0 0 -1"
+                    geometry="primitive:ring; radiusInner: 0.02; radiusOuter: 0.03"
+                    material: "color: black; shader: flat" raycaster: "object: .grabbable"
+                    super-hands: "colliderEvent: raycaster-intersection; colliderEventProperty: els" </a-entity>
+                    <a-box dynamic-body id="box" position="-1 0.5 0" rotation="-90 0 0" scale="1 1 -1" color="#4CC3D9"
+                        grabbable></a-box>
+        </a-scene>
+    </body>
+
+    </html>

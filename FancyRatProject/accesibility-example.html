@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captions and Contrast Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            /* High contrast color */
+            background-color: #0c0b0b;
+            /* High contrast color */
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .first-text {
+            background-color: white;
+            color: black;
+            font-weight: bolder;
+        }
+
+        .another-text {
+            background-color: #ffffff;
+            color: #e60e0e;
+            /* changed to pure black for better contrast */
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <h1>Welcome to My WebSite</h1>
+
+        <img src="https://img.freepik.com/fotos-premium/fantastica-vista-cascada-kirkjufellsfoss-cerca-montana-kirkjufell-al-atardecer_761071-868.jpg"
+            alt="This is a wonderful image of a waterfall near the Kirkjufell mountain at sunset">
+
+        <h2 id="caption">Caption for the Image</h2>
+
+        <p>The above image was taken at kirkjufell near montana. It is a beautiful waterfall where you can
+            relax yourself and enjoy nature</p>
+
+        <video controls>
+            <source src="sample-video.mp4" type="video/mp4">
+            <track src="captions.vtt" kind="captions" srclang="en" label="English captions">
+            This is a video with subtitles.
+        </video>
+
+        <section class="player">
+            <video controls>
+                <source src="rabbit320.mp4" type="video/mp4" />
+                <source src="rabbit320.webm" type="video/webm" />
+                <p>
+                    Your browser doesn't support HTML video. Here is a
+                    <a href="rabbit320.mp4">link to the video</a> instead.
+                </p>
+            </video>
+
+            <div class="controls">
+                <button class="playpause">Play</button>
+                <button class="stop">Stop</button>
+                <button class="rwd">Rwd</button>
+                <button class="fwd">Fwd</button>
+                <div class="time">00:00</div>
+            </div>
+        </section>
+
+        <h2>Very readable text</h2>
+
+        <p class="first-text">This is a paragraph with colors and a bolder font to make it more readable (black text
+            on
+            white background).</p>
+
+        <p class="another-text">This is another example (red text on white background).</p>
+
+    </div>
+
+    <script>
+        const playPauseBtn = document.querySelector(".playpause");
+        const stopBtn = document.querySelector(".stop");
+        const rwdBtn = document.querySelector(".rwd");
+        const fwdBtn = document.querySelector(".fwd");
+        const timeLabel = document.querySelector(".time");
+        const player = document.querySelector("video");
+
+        player.removeAttribute("controls");
+
+        playPauseBtn.onclick = () => {
+            if (player.paused) {
+                player.play();
+                playPauseBtn.textContent = "Pause";
+            } else {
+                player.pause();
+                playPauseBtn.textContent = "Play";
+            }
+        };
+
+        stopBtn.onclick = () => {
+            player.pause();
+            player.currentTime = 0;
+            playPauseBtn.textContent = "Play";
+        };
+
+        rwdBtn.onclick = () => {
+            player.currentTime -= 3;
+        };
+
+        fwdBtn.onclick = () => {
+            player.currentTime += 3;
+            if (player.currentTime >= player.duration || player.paused) {
+                player.pause();
+                player.currentTime = 0;
+                playPauseBtn.textContent = "Play";
+            }
+        };
+
+        player.ontimeupdate = () => {
+            const minutes = Math.floor(player.currentTime / 60);
+            const seconds = Math.floor(player.currentTime - minutes * 60);
+            const minuteValue = minutes < 10 ? `0${minutes}` : minutes;
+            const secondValue = seconds < 10 ? `0${seconds}` : seconds;
+
+            const mediaTime = `${minuteValue}:${secondValue}`;
+            timeLabel.textContent = mediaTime;
+        };
+
+
+    </script>
+</body>
+
+</html>
