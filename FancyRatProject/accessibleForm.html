@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Accessible form code</title>
+    <style>
+        .valid {
+            display: none;
+            color: rgb(16, 230, 16);
+            font-size: 0.7rem;
+        }
+
+        .invalid {
+            display: none;
+            color: rgb(252, 7, 7);
+            font-size: 0.6rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="">
+        <legend tabindex="0">This is an accessible form</legend>
+        <fieldset>
+            <label for="name">Nombre:</label>
+            <input id="name" type="text" name="textfield" required="true" />
+            <p id="nameValid" class="valid">The name is valid</p>
+            <p id="nameInvalid" class="invalid">The name must have at least 5 characters</p>
+
+            <label for="address">Pon tu dirección:</label><br />
+            <textarea id="address" name="addresstext" required="true"></textarea>
+            <p id="addressValid" class="valid">The address is valid</p>
+            <p id="addressInvalid" class="invalid">The address must have at least 10 characters</p>
+
+        </fieldset>
+
+        <fieldset>
+            <legend tabindex="0">Seleccione sus ingredientes para pizzas:</legend>
+            <input id="ham" type="checkbox" name="toppings" value="ham" />
+            <label for="ham">Jamón</label><br />
+            <input id="pepperoni" type="checkbox" name="toppings" value="pepperoni" />
+            <label for="pepperoni">Pepperoni</label><br />
+            <input id="mushrooms" type="checkbox" name="toppings" value="mushrooms" />
+            <label for="mushrooms">Champiñones</label><br />
+            <input id="olives" type="checkbox" name="toppings" value="olives" />
+            <label for="olives">Olivas</label>
+        </fieldset>
+
+        <fieldset>
+            <legend tabindex="0">Elija un método de envío:</legend>
+            <input id="overnight" type="radio" name="shipping" value="overnight" />
+            <label for="overnight">Durante la noche</label><br />
+            <input id="twoday" type="radio" name="shipping" value="twoday" />
+            <label for="twoday">Dos días</label><br />
+            <input id="ground" type="radio" name="shipping" value="ground" />
+            <label for="ground">Tierra</label>
+        </fieldset>
+
+        <fieldset>
+            <label for="favcity">Elige tu ciudad favorita?</label>
+            <select id="favcity" name="select">
+                <option value="1">Amsterdam</option>
+                <option value="2">Buenos Aires</option>
+                <option value="3">Delhi</option>
+                <option value="4">Hong Kong</option>
+                <option value="5">London</option>
+                <option value="6">Los Angeles</option>
+                <option value="7">Moscow</option>
+                <option value="8">Mumbai</option>
+                <option value="9">New York</option>
+                <option value="10">Sao Paulo</option>
+                <option value="11">Tokyo</option>
+            </select>
+        </fieldset>
+
+        <input type="submit" name="submit" value="Enviar busqueda" aria-label="Enviar busqueda" />
+        <input type="reset" name="reset" value="Reiniciar" aria-label="Reiniciar" />
+    </form>
+
+    </form>
+
+    <script>
+        document.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const name = form.elements['name'];
+            const address = form.elements['address'];
+            const nameValidMessage = document.getElementById('nameValid');
+            const nameInvalidMessage = document.getElementById('nameInvalid');
+            const addressValidMessage = document.getElementById('addressValid');
+            const addressInvalidMessage = document.getElementById('addressInvalid');
+
+            if (name.value.length < 5) {
+                nameInvalidMessage.style.display = "block";
+                nameValidMessage.style.display = "none";
+                name.focus();
+            } else {
+                nameInvalidMessage.style.display = "none";
+                nameValidMessage.style.display = "block";
+            }
+
+            if (address.value.length < 10) {
+                addressInvalidMessage.style.display = "block";
+                addressValidMessage.style.display = "none";
+                if (name.value.length >= 5) {
+                    address.focus();
+                }
+            } else {
+                addressInvalidMessage.style.display = "none";
+                addressValidMessage.style.display = "block";
+            }
+        });
+    </script>
+
+    <script>
+
+        var nameField = document.getElementById('name');
+        var nameValidMessage = document.getElementById('nameValid');
+        var nameInvalidMessage = document.getElementById('nameInvalid');
+
+        var addressField = document.getElementById('address');
+        var addressValidMessage = document.getElementById('addressValid');
+        var addressInvalidMessage = document.getElementById('addressInvalid');
+
+        nameField.addEventListener('input', validateName);
+        addressField.addEventListener('input', validateAddress);
+
+        function validateName() {
+            if (nameField.value.length < 5) {
+                nameValidMessage.style.display = "none";
+                nameInvalidMessage.style.display = "block";
+            } else {
+                nameValidMessage.style.display = "block";
+                nameInvalidMessage.style.display = "none";
+            }
+        }
+
+        function validateAddress() {
+            if (addressField.value.length < 10) {
+                addressValidMessage.style.display = "none";
+                addressInvalidMessage.style.display = "block";
+            } else {
+                addressValidMessage.style.display = "block";
+                addressInvalidMessage.style.display = "none";
+            }
+        }
+
+        var form = document.getElementById('myForm');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            validateName();
+            validateAddress();
+        });
+
+        nameField.addEventListener('blur', function() {
+            validateName();
+            validateAddress();
+        });
+
+        nameField.addEventListener('change', function() {
+            validateName();
+            validateAddress();
+        });
+
+        nameField.addEventListener('keyup', function() {
+            validateName();
+            validateAddress();
+        });
+
+        nameField.addEventListener('focusin', function() {
+            validateName();
+            validateAddress();
+        });
+
+        nameField.addEventListener('focusout', function() {
+            validateName();
+            validateAddress();
+        });
+
+        window.addEventListener('load', function() {
+            validateName();
+            validateAddress();
+        });
+    </script>
+
+</body>
+
+</html>

@@ -12,9 +12,9 @@ Chaining
 
 // 1.  can you explain this code ?  
 
-import java.util.ArrayList;  
-import java.util.HashMap;  
-import java.util.List;  
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SpellChecker {  
@@ -64,8 +64,9 @@ public static void main(String[] args) {
 }
 
 /**
-Here’s an explanation of the code snippet for a spell checking and auto-complete system in Java:
-*/
+ * Here’s an explanation of the code snippet for a spell checking and
+ * auto-complete system in Java:
+ */
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -115,6 +116,7 @@ public class SpellChecker {
         List<String> suggestions = spellChecker.getSuggestions(prefix);
         System.out.println("Suggestions for prefix '" + prefix + "': " + suggestions);
     }
+
 }
 
 /**
@@ -194,53 +196,69 @@ public void addToDictionary(String word) {
     dictionary.get(key).add(word);
 }
 
-/*
+    /*
+     * 
+     * In the addToDictionary method of the SpellChecker class, words are added to
+     * the dictionary using the following steps:
+     * 
+     * 1. The method takes a word as input.
+     * 2. The getHashKey method is called, passing the word as an argument, to
+     * calculate the hash key for the word. The
+     * hash key represents the initial character of the word.
+     * 3. The method checks if the dictionary contains the calculated hash key.
+     * 4. If the hash key is not present in the dictionary, it means there are no
+     * words associated with that hash key yet. In
+     * this case, a new entry is created in the dictionary with the hash key as the
+     * key and an empty ArrayList as the value.
+     */
 
-In the addToDictionary method of the SpellChecker class, words are added to the dictionary using the following steps:
+    if(!dictionary.containsKey(key))
 
-1.  The method takes a word as input.
-2.  The getHashKey method is called, passing the word as an argument, to calculate the hash key for the word. The 
-hash key represents the initial character of the word.
-3.  The method checks if the dictionary contains the calculated hash key.
-4.  If the hash key is not present in the dictionary, it means there are no words associated with that hash key yet. In 
-this case, a new entry is created in the dictionary with the hash key as the key and an empty ArrayList as the value.
-*/
+    {
+        dictionary.put(key, new ArrayList<>());
+    }
+    /*
+     * 
+     * 5. If the hash key is already present in the dictionary, it means there are
+     * words associated with that hash key. In this case, the method retrieves the
+     * existing list of words associated with the hash key from the dictionary.
+     * 6. The word is then added to the retrieved list of words.
+     * 
+     */
+    dictionary.get(key).add(word);
 
-if (!dictionary.containsKey(key)) {
-    dictionary.put(key, new ArrayList<>());
-}
-/*
+    /*
+     * 
+     * 7. Finally, the updated list of words is put back into the dictionary with
+     * the hash key as the key, effectively
+     * updating the entry in the dictionary with the new word added.
+     * 
+     * By following these steps, words are added to the dictionary using the
+     * chaining technique in hashing. Words with
+     * the same hash key are stored in the same list, allowing for efficient
+     * retrieval and organization of words based
+     * on their initial characters.
+     */
 
-5.  If the hash key is already present in the dictionary, it means there are words associated with that hash key. In this case, the method retrieves the existing list of words associated with the hash key from the dictionary.
-6.  The word is then added to the retrieved list of words.
+    // 4. How does the getSuggestions method retrieve suggestions in this code?
 
-*/
-dictionary.get(key).add(word);
-
-/*
-
-7.  Finally, the updated list of words is put back into the dictionary with the hash key as the key, effectively 
-updating the entry in the dictionary with the new word added.
-
-By following these steps, words are added to the dictionary using the chaining technique in hashing. Words with
- the same hash key are stored in the same list, allowing for efficient retrieval and organization of words based 
- on their initial characters.
-*/
-
-// 4.  How does the getSuggestions method retrieve suggestions in this code?
-
-
-/*
-The getSuggestions method uses the hash key of the prefix to retrieve suggestions from the dictionary.
-
-The getSuggestions method takes a prefix as input and returns a list of suggestions for words that begin with that prefix.
-
-The method first computes the hash key of the prefix using the getHashKey method. The hash key is the first lowercase character of the prefix.
-
-Next, the method checks if the hash key exists in the dictionary. If the hash key exists in the dictionary, the method returns the list of words associated with the hash key as suggestions.
-
-If the hash key does not exist in the dictionary, the method returns an empty list.
-*/
+    /*
+     * The getSuggestions method uses the hash key of the prefix to retrieve
+     * suggestions from the dictionary.
+     * 
+     * The getSuggestions method takes a prefix as input and returns a list of
+     * suggestions for words that begin with that prefix.
+     * 
+     * The method first computes the hash key of the prefix using the getHashKey
+     * method. The hash key is the first lowercase character of the prefix.
+     * 
+     * Next, the method checks if the hash key exists in the dictionary. If the hash
+     * key exists in the dictionary, the method returns the list of words associated
+     * with the hash key as suggestions.
+     * 
+     * If the hash key does not exist in the dictionary, the method returns an empty
+     * list.
+     */
 
 public List<String> getSuggestions(String prefix) {
     String key = getHashKey(prefix);
@@ -250,34 +268,54 @@ public List<String> getSuggestions(String prefix) {
     return new ArrayList<>();
 }
 
-/*
-The getHashKey method is used to calculate the hash key of the prefix, which is the first lowercase character of the prefix.
+    /*
+     * The getHashKey method is used to calculate the hash key of the prefix, which
+     * is the first lowercase character of the prefix.
+     * 
+     * The containsKey method is called on the dictionary, passing in the hash key
+     * as an argument, to check if the hash key exists in the dictionary.
+     * 
+     * If the hash key exists in the dictionary, the get method is called on the
+     * dictionary, passing in the hash key as an argument, to retrieve the list of
+     * words associated with the hash key. This list is then returned as
+     * suggestions.
+     * 
+     * If the hash key does not exist in the dictionary, an empty list is returned.
+     * 
+     * The SpellChecker’s getSuggestions method retrieves suggestions for a given
+     * prefix as follows:
+     * 
+     * 1. The getSuggestions method takes a prefix and initialises an empty
+     * ArrayList called suggestions for storing suggestions.
+     * 2. To calculate the hash key for the prefix, the getHashKey method is called
+     * with the prefix as an argument. The first character of the prefix is
+     * represented by this hash key.
+     * 3. Using the containsKey method, the method checks whether the dictionary
+     * contains the calculated hash key.
+     * 4. If the hashkey is present in the dictionary, it means that there are words
+     * associated with that hashkey that might have the same prefix.
+     * 5. Using the get method, the method retrieves the list of words associated
+     * with the hash key.
+     * 6. Each word in the list of words associated with the hash key is iterated
+     * over in a loop.
+     * 7. For each word, the method uses the startsWith method to check whether the
+     * word starts with the prefix that was given. If the word starts with the given
+     * prefix, it is considered as suggested and is added to the suggested list
+     * using the add method.
+     * 8. Finally, the suggestion list will be returned with the list of suggestion
+     * words.
+     * 
+     * In summary, the getSuggestions method uses the hash key of the prefix to
+     * retrieve suggestions from the dictionary. If the hash key exists in the
+     * dictionary, the method returns the list of words associated with the hash key
+     * as suggestions. If the hash key does not exist in the dictionary, the method
+     * returns an empty list.
+     */
 
-The containsKey method is called on the dictionary, passing in the hash key as an argument, to check if the hash key exists in the dictionary.
+    // 5. How is the getHashKey method implemented to calculate the hash key for a
+    // word in the code?
 
-If the hash key exists in the dictionary, the get method is called on the dictionary, passing in the hash key as an argument, to retrieve the list of words associated with the hash key. This list is then returned as suggestions.
-
-If the hash key does not exist in the dictionary, an empty list is returned.
-
-The SpellChecker’s getSuggestions method retrieves suggestions for a given prefix as follows:
-
-1.  The getSuggestions method takes a prefix and initialises an empty ArrayList called suggestions for storing suggestions.
-2.  To calculate the hash key for the prefix, the getHashKey method is called with the prefix as an argument. The first character of the prefix is represented by this hash key.
-3.  Using the containsKey method, the method checks whether the dictionary contains the calculated hash key.
-4.  If the hashkey is present in the dictionary, it means that there are words associated with that hashkey that might have the same prefix.
-5.  Using the get method, the method retrieves the list of words associated with the hash key.
-6.  Each word in the list of words associated with the hash key is iterated over in a loop.
-7.  For each word, the method uses the startsWith method to check whether the word starts with the prefix that was given. If the word starts with the given prefix, it is considered as suggested and is added to the suggested list using the add method.
-8.  Finally, the suggestion list will be returned with the list of suggestion words.
-
-In summary, the getSuggestions method uses the hash key of the prefix to retrieve suggestions from the dictionary. If the hash key exists in the dictionary, the method returns the list of words associated with the hash key as suggestions. If the hash key does not exist in the dictionary, the method returns an empty list.
-*/
-
-
-// 5.  How is the getHashKey method implemented to calculate the hash key for a word in the code?
-
-
-//The getHashKey method is implemented using the following code:
+    // The getHashKey method is implemented using the following code:
 
 private String getHashKey(String word) {
     if (word.isEmpty()) {
@@ -287,18 +325,30 @@ private String getHashKey(String word) {
 }
 
 /*
-The method takes a word as input and returns its hash key. The hash key is the first lowercase character of the word.
-
-The String.valueOf method is used to convert the character to a string. The lowercase method is used to convert the first character of the word to lowercase to make it consistent with the other keys in the dictionary.
-
-Explanation of the method:
-
-1.  A word is taken as input to the getHashKey method.
-2.  Using the isEmpty method, the method first checks whether the word is empty. An empty string is returned as the hash key if the word is empty.
-3.  The charAt(0) method is used to extract the first character of the word if the word is not empty.
-4.  To ensure case-insensitive hashing, the first character is then converted to lowercase using the toLowerCase method.
-5.  The valueOf method is used to convert the first lowercase character to a string.
-6.  Finally, the hash key is returned as the lowercase first character, now represented as a string.
-
-With this procedure, the getHashKey method computes the hash key for a given word, extracting its first character, converting it to lowercase and returning it as a string. This hash key represents the first character of the word. It is used to organise words in the dictionary according to their first characters.
-*/
+ * The method takes a word as input and returns its hash key. The hash key is
+ * the first lowercase character of the word.
+ * 
+ * The String.valueOf method is used to convert the character to a string. The
+ * lowercase method is used to convert the first character of the word to
+ * lowercase to make it consistent with the other keys in the dictionary.
+ * 
+ * Explanation of the method:
+ * 
+ * 1. A word is taken as input to the getHashKey method.
+ * 2. Using the isEmpty method, the method first checks whether the word is
+ * empty. An empty string is returned as the hash key if the word is empty.
+ * 3. The charAt(0) method is used to extract the first character of the word if
+ * the word is not empty.
+ * 4. To ensure case-insensitive hashing, the first character is then converted
+ * to lowercase using the toLowerCase method.
+ * 5. The valueOf method is used to convert the first lowercase character to a
+ * string.
+ * 6. Finally, the hash key is returned as the lowercase first character, now
+ * represented as a string.
+ * 
+ * With this procedure, the getHashKey method computes the hash key for a given
+ * word, extracting its first character, converting it to lowercase and
+ * returning it as a string. This hash key represents the first character of the
+ * word. It is used to organise words in the dictionary according to their first
+ * characters.
+ */
