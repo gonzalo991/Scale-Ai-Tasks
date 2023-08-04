@@ -9,16 +9,16 @@ reviews_df = pd.read_csv('customer_reviews.csv')
 
 # Perform sentiment analysis on each review
 
-sentiments = []  
-for review in reviews_df['review_text']:  
-    blob = TextBlob(review)  
-    sentiment_score = blob.sentiment.polarity  
-    if sentiment_score > 0:  
-        sentiment = 'Positive'  
-    elif sentiment_score < 0:  
-        sentiment = 'Negative' 
-    else:  
-        sentiment = 'Neutral' 
+sentiments = []
+for review in reviews_df['review_text']:
+    blob = TextBlob(review)
+    sentiment_score = blob.sentiment.polarity
+    if sentiment_score > 0:
+        sentiment = 'Positive'
+    elif sentiment_score < 0:
+        sentiment = 'Negative'
+    else:
+        sentiment = 'Neutral'
 sentiments.append(sentiment)
 
 # Add sentiment column to the dataframe
@@ -35,27 +35,27 @@ average_sentiment_score = reviews_df['sentiment_score'].mean()
 
 # Identify most common positive and negative words
 
-positive_reviews = reviews_df[reviews_df['sentiment'] == 'Positive']  
+positive_reviews = reviews_df[reviews_df['sentiment'] == 'Positive']
 positive_words = ’ '.join(positive_reviews['review_text']).split()
 
-negative_reviews = reviews_df[reviews_df['sentiment'] == 'Negative']  
+negative_reviews = reviews_df[reviews_df['sentiment'] == 'Negative']
 negative_words = ’ '.join(negative_reviews['review_text']).split()
 
-common_positive_words = pd.Series(positive_words).value_counts().head(10)  
+common_positive_words = pd.Series(positive_words).value_counts().head(10)
 common_negative_words = pd.Series(negative_words).value_counts().head(10)
 
 # Generate insights and reports
 
-print('Sentiment Distribution:')  
+print('Sentiment Distribution:')
 print(sentiment_counts)
 
-print('\nAverage Sentiment Score:')  
+print('\nAverage Sentiment Score:')
 print(average_sentiment_score)
 
-print('\nMost Common Positive Words:')  
+print('\nMost Common Positive Words:')
 print(common_positive_words)
 
-print('\nMost Common Negative Words:')  
+print('\nMost Common Negative Words:')
 print(common_negative_words)
 
 # Export the updated dataset with sentiment analysis results
@@ -65,57 +65,57 @@ reviews_df.to_csv('customer_reviews_with_sentiment.csv', index=False)
 '''
 The code above performs sentiment analysis on customer reviews and generates insights and reports.
 
-The code imports the libraries pandas and TextBlob. It then reads the customer reviews dataset and performs 
-sentiment analysis on each review. The sentiments are added to the dataframe, and the overall sentiment distribution, 
-average sentiment score, and the most common positive and negative words are calculated. Finally, the updated dataset 
+The code imports the libraries pandas and TextBlob. It then reads the customer reviews dataset and performs
+sentiment analysis on each review. The sentiments are added to the dataframe, and the overall sentiment distribution,
+average sentiment score, and the most common positive and negative words are calculated. Finally, the updated dataset
 is exported with the sentiment analysis results.
 
-In this example, we assume that you have a CSV file called ‘customer_reviews.csv’. This file contains customer reviews 
-in a column called ‘review_text’. This code uses TextBlob’s sentiment-analysis library, where sentiments are scored from 
+In this example, we assume that you have a CSV file called ‘customer_reviews.csv’. This file contains customer reviews
+in a column called ‘review_text’. This code uses TextBlob’s sentiment-analysis library, where sentiments are scored from
 -1 to 1. Sentiments are classified as positive, negative or neutral based on these scores.
 
 The code iterates over each review, performs sentiment analysis using TextBlob and assigns a sentiment label (‘positive’,
  ‘negative’ or ‘neutral’). The code adds the sentiment-column to the dataframe.
 
-By counting the occurrences of each sentiment label, the code calculates the overall sentiment distribution. 
+By counting the occurrences of each sentiment label, the code calculates the overall sentiment distribution.
 The code also calculates the average sentiment score across all of the reviews.
 
-In addition, by combining all positive and negative reviews and extracting the most common words, the code 
+In addition, by combining all positive and negative reviews and extracting the most common words, the code
 identifies the most common positive and negative words.
 
-Lastly, the code generates insights and reporting, printing the sentiment distribution, average sentiment 
+Lastly, the code generates insights and reporting, printing the sentiment distribution, average sentiment
 scores and the most common positive and negative words.
 
-When finished, the code exports the updated dataset containing the sentiment analysis results to a new CSV 
+When finished, the code exports the updated dataset containing the sentiment analysis results to a new CSV
 file named ‘customer_reviews_with_sentiment.csv’.
 
-Note that this is a simplified example and in a real situation it might be necessary to pre-process the 
-text data, handle more complex sentiment analysis models and consider additional features such as review 
+Note that this is a simplified example and in a real situation it might be necessary to pre-process the
+text data, handle more complex sentiment analysis models and consider additional features such as review
 metadata, entity extraction and trend analysis to enhance brand reputation management.
 
  2. How does the code handle preprocessing of the customer reviews ?
 
-The pre-processing of customer reviews is not explicitly shown in the code example provided. However, for 
-NLP tasks such as sentiment analysis, preprocessing is an important step. Before performing sentiment analysis, 
+The pre-processing of customer reviews is not explicitly shown in the code example provided. However, for
+NLP tasks such as sentiment analysis, preprocessing is an important step. Before performing sentiment analysis,
 here are some common preprocessing techniques that can be used:
 
--   **Text cleaning**  — This is the removal of unnecessary characters, such as punctuation marks, special 
+-   **Text cleaning**  — This is the removal of unnecessary characters, such as punctuation marks, special
 symbols or emoticons, which may not contribute significantly to the sentiment analysis task.
--   **Lowercase**  — Ensures that the sentiment analysis model treats words in a case-insensitive manner by 
+-   **Lowercase**  — Ensures that the sentiment analysis model treats words in a case-insensitive manner by
 converting all text to lower case. This is not the case with the words ‘good’ and ‘good’.
--   **Tokenisation**  — In this step, the text is broken down into individual words, or tokens. Tokenisation 
+-   **Tokenisation**  — In this step, the text is broken down into individual words, or tokens. Tokenisation
 helps to analyse text at a more granular level. It also helps to capture word-level features.
--   **Stopword removal**  — Stopwords are common words such as ‘and’, ‘the’ or ‘is’ that often carry little 
-sentiment or meaning. The removal of stop words can reduce noise in the data and improve the efficiency of 
+-   **Stopword removal**  — Stopwords are common words such as ‘and’, ‘the’ or ‘is’ that often carry little
+sentiment or meaning. The removal of stop words can reduce noise in the data and improve the efficiency of
 sentiment analysis.
--   **Lemmatisation or stemming**  — Lemmatising or stemming reduces words to their stem or root. Lemmatisation 
-takes into account the context of the word. Stemming applies simpler rules to remove prefixes or suffixes. The 
+-   **Lemmatisation or stemming**  — Lemmatising or stemming reduces words to their stem or root. Lemmatisation
+takes into account the context of the word. Stemming applies simpler rules to remove prefixes or suffixes. The
 aim is to reduce inflectional variation and treat related words as the same, which is an aid to sentiment analysis accuracy.
--   **Negation handling**  — Negation words can reverse the sentiment of subsequent words, such as “not”, “no” 
-or “never”. As part of the pre-processing, the identification and handling of such negation patterns may be 
+-   **Negation handling**  — Negation words can reverse the sentiment of subsequent words, such as “not”, “no”
+or “never”. As part of the pre-processing, the identification and handling of such negation patterns may be
 necessary to ensure accurate sentiment analysis.
 
-Libraries such as NLTK (Natural Language Toolkit) or spaCy in Python are typically used to perform these 
+Libraries such as NLTK (Natural Language Toolkit) or spaCy in Python are typically used to perform these
 preprocessing steps. Improving the quality of input data, reducing noise and improving the performance of
 sentiment analysis models can be achieved by implementing these techniques prior to sentiment analysis.
 '''

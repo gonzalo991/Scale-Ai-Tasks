@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactions</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"
+            event-set__enter="_event: mouseenter; _target: #cylinderText; visible: true"
+            event-set__leave="_event: mouseleave; _target: #cylinderText; visible: false" change-color-on-hover="color: goldenrod">
+            <a-text id="cylinderText" value="This is a cylinder" align="center" color="#FFF" visible="false"
+                position="0 -0.55 0.55" geometry="primitive: plane; width: 1.75" material="color: #333"></a-text>
+        </a-cylinder>
+
+        <a-box color="#EF2D5E" position="0 1 -4" change-color-on-hover="color: blue"></a-box>
+
+        <a-camera>
+            <a-cursor></a-cursor>
+        </a-camera>
+    </a-scene>
+
+    <script>
+        AFRAME.registerComponent('change-color-on-hover', {
+            schema: {
+                color: { default: 'red' }
+            },
+
+            init: function () {
+                var data = this.data;
+                var el = this.el;  // <a-box>
+                var defaultColor = el.getAttribute('material').color;
+
+                el.addEventListener('mouseenter', function () {
+                    el.setAttribute('color', data.color);
+                });
+
+                el.addEventListener('mouseleave', function () {
+                    el.setAttribute('color', defaultColor);
+                });
+            }
+        });
+    </script>
+</body>

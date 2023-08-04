@@ -1,4 +1,4 @@
-package FancyRatProject;
+package POO;
 import java.util.HashSet;
 
 public class HashSetExample {

@@ -1,4 +1,4 @@
-package FancyRatProject;
+package POO;
 public class Monitor {
 
     private final int idMonitor;
